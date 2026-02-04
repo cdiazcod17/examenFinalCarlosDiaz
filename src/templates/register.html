@@ -1,22 +1,28 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
-<div class="form" >
-    <form action="{{url_for('auth_route.register_form')}}" method="post">
-        <label for="">Nombre</label>
-        <input type="text" name="username" placeholder="Ej.Pepe">
-        <input type="email" name="email" placeholder="Ej.Pepe@gmail.com">
-        <input type="password" name="password" placeholder="******">
-        <input type="password" name="confirm_password" placeholder="******">
-        <select name="rol" id="">
+<div class="form">
+    <form action="{{ url_for('auth_route.register_form') }}" method="post">
+        <label for="username">Nombre</label>
+        <input type="text" id="username" name="username" placeholder="Ej. Pepe">
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Ej. Pepe@gmail.com">
+        
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="******">
+        
+        <label for="confirm_password">Confirmar Contraseña</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="******">
+        
+        <label for="rol">Rol</label>
+        <select id="rol" name="rol">
             <option value="admin">Admin</option>
-            <option value="user">user</option>
+            <option value="user">User</option>
         </select>
+        
         <button type="submit">Registrarse</button>
     </form>
-    <p>Ya tienes cuenta?<a href="{{url_for('auth_route.login')}}">Iniciar sesion</a></p>
+    <p>¿Ya tienes cuenta? <a href="{{ url_for('auth_route.login') }}">Iniciar sesión</a></p>
 </div>
-
-
 {% endblock %}
