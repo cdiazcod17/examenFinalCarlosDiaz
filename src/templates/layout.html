@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='styles/styles.css')}}">
-    <title>{% block title %} {% enblock %}</title>
+    <title>{% block title %} {% endblock %}</title>
 </head>
 
 <body>
@@ -19,7 +19,23 @@
     {% endif %}
     {% endwith %}
 
+    {% block head %}
+        <header>
+            <nav>
+                <a href="{{url_for('index')}}">Home</a>
+                <a href="{{url_for('about')}}">About</a>
+                <a href="{{url_for('auth_route.login')}}">login</a>
+
+                {% if token %}
+                <a href="{{url_for('profile_route.profile')}}">Mis Favoritos</a>
+                <a href="{{url_for('logout')}}">Logout</a>
+                {% endif %}
+
+            </nav>
+        </header>
     
+    {% endblock %}
+
     {% block content %}{% endblock %}
     <link rel="stylesheet" href="{{url_for('static',filename='styles/styles.css')}}">
 </body>
