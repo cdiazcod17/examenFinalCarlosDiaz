@@ -1,4 +1,4 @@
-from flask import redirect,render_template,Blueprint,session,request,flash,url_for
+from flask import redirect,render_template,Blueprint,session,request,flash,url_for,jsonify
 from flask_jwt_extended import create_access_token,get_jwt,jwt_required
 from werkzeug.security import generate_password_hash,check_password_hash
 from database.database import getConexion
@@ -116,9 +116,6 @@ def login_form():
         if not check_password_hash(user['password_hash'],password):
             flash('usuario no existe por favor verifique los datos','danger')
             return redirect(url_for('auth_route.login')) 
-
-        data = {"user_id":user['id'],"email":email}
-        token = create_access_token(identity=data)
         
         session['user_id'] = user['id']
         session['email'] = user['email']
@@ -168,3 +165,16 @@ def auth_dashboard():
         flash('Acceso no autorizado','danger')
         return redirect(url_for('profile_route.profile'))
     return render_template('admin.html')
+
+@auth_route.route('/auth/token',methods = ['GET'])
+def gen_token():
+    
+    if not 'rol' in session:
+        return jsonify({"message":"Por favor inicie sesion desde login"}),400
+    
+    if session['rol'] == 'user':
+        return jsonify({"message":"No autorizado"}),400
+    
+    data = {"user_id":session['user_id'],"email":session['email']}
+    token = create_access_token(identity=data)    
+    return jsonify({"message":"ok, token creado","token":token}),200
