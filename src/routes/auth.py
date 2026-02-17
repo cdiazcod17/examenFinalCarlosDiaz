@@ -73,13 +73,13 @@ def register_form():
             cursor.executemany(query_characetrs_saved,fav_table)
             conexion.commit()    
         
-            flash('Registro realizado correctamente, por favor inicie sesion','danger')
+            flash('Registro realizado correctamente, por favor inicie sesion','success')
             return redirect(url_for('auth_route.login_form'))
         
         if rol == 'admin':
             cursor.execute('INSERT INTO users (username,email,password_hash,rol) VALUES(%s,%s,%s,%s)',(username,email,password_hash,rol))
             conexion.commit()
-            flash('Registro realizado correctamente, por favor inicie sesion','danger')
+            flash('Registro realizado correctamente, por favor inicie sesion','success')
             return redirect(url_for('auth_route.login_form'))
         
     except Exception as e:
