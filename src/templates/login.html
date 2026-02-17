@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
-
+{% block title %}{{ title }} {% endblock %}
 {% block content %}
 
 <div class="form" >
     <form action="{{url_for('auth_route.login_form')}}" method="post">
         <label for="">Nombre</label>
-        <input type="text" name="nombre" placeholder="Ej.Pepe">
+        <input type="text" name="email" placeholder="Ej.Pepe@gmail.com">
         <input type="password" name="password" placeholder="******">
         <button type="submit">Iniciar sesion</button>
     </form>
@@ -14,3 +14,4 @@
 
 
 {% endblock %}
+

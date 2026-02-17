@@ -1,1 +1,16 @@
 {% extends 'layout.html' %}
+
+{% block title %}{{ data.title }} {% endblock %}
+
+{% block content %}
+
+{% for char in data.characters %}
+<div class="card_fav">
+    <h1>{{ char.name }}</h1>
+    <h1>{{ char.gender }}</h1>
+    <img src="{{ char.imagen }}" alt="">
+
+</div>
+{% endfor %}
+    
+{% endblock %}

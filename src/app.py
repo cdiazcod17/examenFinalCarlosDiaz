@@ -18,12 +18,16 @@ app.register_blueprint(profile_route)
 
 @app.route('/')
 def index():
-    flash('Bienvenido')
+    
     return render_template('index.html',title = 'Inicio')
 
 @app.route('/about')
 def about():
     return render_template('about.html',title = 'about')
+
+@app.errorhandler(404)
+def handle_404(error):
+    return render_template('404.html', title='Página no encontrada'), 404
 
 @app.route('/healthz')
 def healthz():
@@ -35,7 +39,6 @@ def healthz():
     except Exception as e:
         return jsonify({"status":"error en la conexion {}".format(str(e))})
         
-
 
 if __name__=='__main__':
     app.run(debug=True)
