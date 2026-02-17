@@ -1,7 +1,7 @@
 from flask import redirect,render_template,Blueprint,session,request,flash,url_for
 from flask_jwt_extended import create_access_token,get_jwt,jwt_required
 from werkzeug.security import generate_password_hash,check_password_hash
-from database.get_database import getConexion
+from database.database import getConexion
 import random
 from api.api_futurama import getCharacters
 
