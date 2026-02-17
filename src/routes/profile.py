@@ -14,6 +14,9 @@ def profile():
     if not 'user_id' in session:
         return redirect(url_for('auth_route.login_form'))  
     
+    if session['rol'] == 'admin':
+        return redirect(url_for('auth_route.auth_dashboard')) 
+    
     user_id =session['user_id']
     conexion = getConexion()
     cursor = conexion.cursor(dictionary=True)
@@ -27,7 +30,7 @@ def profile():
     ''', (user_id,))
     characters = cursor.fetchall() 
     data = {
-        "title":"profile",
+        "title":"profile",  
         "characters":characters
     }   
     return render_template('profile.html',data = data)

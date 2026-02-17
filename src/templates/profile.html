@@ -4,13 +4,19 @@
 
 {% block content %}
 
-{% for char in data.characters %}
-<div class="card_fav">
-    <h1>{{ char.name }}</h1>
-    <h1>{{ char.gender }}</h1>
-    <img src="{{ char.imagen }}" alt="">
-
+<div class="content">
+    
+    {% for char in data.characters %}
+    <div class="character-card">
+        <h1>{{ char.name }}</h1>
+        <h1>{{ char.gender }}</h1>
+        {% if not char.imagen %}
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500" alt="">
+        {% else %}
+        <img src="{{ char.imagen }}" alt="">
+        {% endif %}    
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
     
 {% endblock %}

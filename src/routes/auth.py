@@ -94,10 +94,7 @@ def register_form():
 def login_form():
     email = request.form.get('email')
     password = request.form.get('password')
-    
-    print(email)
-    print(password)
-    
+
     if not email or not password:
         flash('Todos los datos son requeridos','danger')
         return redirect(url_for('auth_route.login'))
@@ -129,12 +126,11 @@ def login_form():
         
         if user['rol'] == 'user': 
             flash('Bienvenido {}'.format(user['username']),'success')
-            return render_template('/profile.html',token = token)
+            return redirect(url_for('profile_route.profile'))
         
         if user['rol'] == 'admin': 
             flash('Bienvenido {}'.format(user['username']),'success')
-            return render_template('/admin.html',token = token)
-        
+            return redirect(url_for('auth_route.auth_dashboard'))
         
     except Exception as e:
         print(e)
@@ -145,13 +141,26 @@ def login_form():
             conexion.close()
             
 @auth_route.route('/login',methods=['GET'])
-def login():    
-    if 'user_id' in session:
+def login():
+    if 'rol' not in session:
+        return render_template('login.html',title = 'login')        
+        
+    if session['rol'] == 'user':
         return redirect(url_for('profile_route.profile') ) 
-    return render_template('login.html',title = 'login')
+    
+    if session['rol'] == 'admin':
+        return redirect(url_for('auth_route.auth_dashboard') ) 
+    
 
 @auth_route.route('/logout')
 def logout():
     session.clear()
-    flash('Logout exitoso','success')
-    return redirect(url_for('auth_route.login'))
+    flash('Logout exitoso','danger')
+    return redirect(url_for('index'))
+
+@auth_route.route('/auth',methods = ['GET'])
+def auth_dashboard():
+    if session['rol'] == 'user':
+        flash('Acceso no autorizado','danger')
+        return redirect(url_for('profile_route.profile'))
+    return render_template('admin.html')

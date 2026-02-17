@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='styles/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}">
     <title>{% block title %} {% endblock %}</title>
 </head>
 
@@ -23,11 +23,17 @@
         <header>
             <nav>
                 
-                {% if session %}
+                {% if 'rol' in session %}
                 <h1>Hola {{ session['email'].split('@')[0] }} </h1>
-                <a href="{{url_for('index')}}">Home</a>
-                <a href="{{url_for('profile_route.profile')}}">Mis Favoritos</a>
-                <a href="{{url_for('auth_route.logout')}}">Logout</a>                
+                    {% if session['rol'] == 'user' %}
+                    <a href="{{url_for('index')}}">Home</a>
+                    <a href="{{url_for('profile_route.profile')}}">Mis Favoritos</a>
+                    <a href="{{url_for('auth_route.logout')}}" class="btn_logout">Logout</a>  
+                    {% else %}
+                    <a href="{{url_for('index')}}">Home</a>
+                    <a href="{{url_for('auth_route.auth_dashboard')}}">Admin</a>
+                    <a href="{{url_for('auth_route.logout')}}" class="btn_logout">Logout</a>  
+                    {% endif %}
                 
                 {% else %}
                 <a href="{{url_for('index')}}">Home</a>
