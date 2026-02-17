@@ -2,11 +2,12 @@ from flask import Flask, render_template,redirect, Blueprint,flash,jsonify
 import os
 from dotenv import load_dotenv
 from flask_jwt_extended import create_access_token,get_jwt,jwt_required,JWTManager
-from database.database import getConexion
+from database.get_database import getConexion
 
 from routes.auth import auth_route
 from routes.profile import profile_route
 
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key=os.getenv('SECRETKEY')
