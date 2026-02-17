@@ -1,9 +1,36 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 
-{% block title %}{{ title }} {% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+<main>
+    <section class="hero">
+        <h1>¡Bienvenido a Futurama Favorites!</h1>
+        <p>Guarda tus personajes favoritos de Futurama y crea tu perfil único.</p>
+        <div class="cta-buttons">
+            <a href="{{ url_for('auth_route.login') }}" class="btn btn-primary">Iniciar Sesión</a>
+            <a href="{{ url_for('auth_route.register') }}" class="btn btn-secondary">Registrarse</a>
+        </div>
+    </section>
 
-
-
+    <section class="features">
+        <div class="container">
+            <h2>¿Por qué usar Futurama Favorites?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>⭐ Personajes Random</h3>
+                    <p>Al registrarte recibes 5 personajes aleatorios de Futurama como favoritos iniciales.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👥 Perfiles Personalizados</h3>
+                    <p>Usuarios normales y administradores con paneles diferenciados.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Rápido y Seguro</h3>
+                    <p>Base de datos MySQL optimizada con sesiones seguras.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

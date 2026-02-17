@@ -27,10 +27,12 @@
                 <h1>Hola {{ session['email'].split('@')[0] }} </h1>
                     {% if session['rol'] == 'user' %}
                     <a href="{{url_for('index')}}">Home</a>
+                    <a href="{{url_for('about')}}">About</a>
                     <a href="{{url_for('profile_route.profile')}}">Mis Favoritos</a>
                     <a href="{{url_for('auth_route.logout')}}" class="btn_logout">Logout</a>  
                     {% else %}
                     <a href="{{url_for('index')}}">Home</a>
+                    <a href="{{url_for('about')}}">About</a>
                     <a href="{{url_for('auth_route.auth_dashboard')}}">Admin</a>
                     <a href="{{url_for('auth_route.logout')}}" class="btn_logout">Logout</a>  
                     {% endif %}

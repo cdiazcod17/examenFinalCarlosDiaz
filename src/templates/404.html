@@ -1,6 +1,25 @@
-{% extends 'layout.html' %}
-{{ title }} 
+{% extends "layout.html" %}
+
+{% block title %}Página no encontrada - 404{% endblock %}
 
 {% block content %}
-<h1>404 Pagina no encontrada</h1>
+<main class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-code">
+                <h1>404</h1>
+            </div>
+            
+            <div class="error-message">
+                <h2>¡Oops! Página no encontrada</h2>
+                <p>La página que buscas no existe o se ha movido.</p>
+                
+                <div class="error-actions">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Ir al Home</a>
+                    <a href="{{ url_for('auth_route.login') }}" class="btn btn-secondary">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

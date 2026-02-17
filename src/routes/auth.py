@@ -160,6 +160,10 @@ def logout():
 
 @auth_route.route('/auth',methods = ['GET'])
 def auth_dashboard():
+    
+    if not 'rol' in session:
+        return redirect(url_for('auth_route.login'))
+    
     if session['rol'] == 'user':
         flash('Acceso no autorizado','danger')
         return redirect(url_for('profile_route.profile'))
