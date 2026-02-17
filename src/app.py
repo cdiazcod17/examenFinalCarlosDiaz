@@ -1,8 +1,10 @@
 from flask import Flask, render_template,redirect, Blueprint,flash,jsonify
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from dotenv import load_dotenv
 from flask_jwt_extended import create_access_token,get_jwt,jwt_required,JWTManager
-from database.get_database import getConexion
+from database_function.get_database import getConexion
 
 from routes.auth import auth_route
 from routes.profile import profile_route
