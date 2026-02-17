@@ -9,6 +9,7 @@ from datetime import timedelta
 
 from routes.auth import auth_route
 from routes.profile import profile_route
+from routes.admin import api_route
 
 load_dotenv()
 
@@ -21,6 +22,7 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=20)
 
 app.register_blueprint(auth_route)
 app.register_blueprint(profile_route)
+app.register_blueprint(api_route)
 
 @app.route('/')
 def index():

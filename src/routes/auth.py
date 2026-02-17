@@ -175,6 +175,6 @@ def gen_token():
     if session['rol'] == 'user':
         return jsonify({"message":"No autorizado"}),400
     
-    data = {"user_id":session['user_id'],"email":session['email']}
-    token = create_access_token(identity=data)    
-    return jsonify({"message":"ok, token creado","token":token}),200
+    identity = str(session['user_id'])  # "1"
+    token = create_access_token(identity=identity)
+    return jsonify({"token":token}),200
