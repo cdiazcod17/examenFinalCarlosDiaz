@@ -39,7 +39,7 @@ DELETE /api/admin/5   → Eliminar
 Autenticación JWT → Token 20 minutos
 
 📱 Demo en vivo
-https://examenfinalcarlosdiaz.onrender.com
+https://futurama-fav-app.onrender.com
 
 text
 Usuario demo:
